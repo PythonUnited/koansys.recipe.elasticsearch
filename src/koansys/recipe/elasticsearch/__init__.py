@@ -20,8 +20,6 @@ ELASTICSEARCH_BINARIES = (
     'elasticsearch',
     )
 
-JAVA_VERSION="1\.[6-8]\.[0-9]+"
-
 # value awaits abitrary string
 # flag test only for 'true'/'false defined in the buildout config
 #  and sets only this paramt without any value
@@ -56,8 +54,6 @@ class Recipe(zc.recipe.egg.Eggs):
                              stderr=subprocess.PIPE)
         version_line=p.stderr.readline()
         logger.info("found: {0}".format(version_line))
-        assert re.search(JAVA_VERSION, version_line) is not None, \
-               "Java 1.6 or higher ust be installed"
         filename = self.options['url'].split(os.sep)[-1]
         dst = os.path.join(self.buildout['buildout']['parts-directory'],
                            self.name)
